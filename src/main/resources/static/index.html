@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+
+    <title>Title</title>
+</head>
+<body>
+<form class="d-flex" id="search-form">
+    <input id="search-input" class="form-control me-2" type="search" placeholder="Search movie..." aria-label="Search">
+
+    <button class="btn btn-outline-success" type="submit" data-bs-toggle="tooltip" data-bs-placement="right" title="Search all users"><span class="la la-search"></span></button>
+</form>
+<div id="resultado">
+    HOLA
+</div>
+
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+<script>
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+
+    const searchForm = document.getElementById("search-form");
+    var results = [];
+
+
+    searchForm.addEventListener("submit", function(event){
+        event.preventDefault();
+
+        //fetch(`http://localhost:8080/api/users/getAll/${document.getElementById("search-input").value}`)
+
+        fetch(`http://localhost:8080/api/users/getAll`)
+            .then(res => {
+                console.log("Response here")
+                return res.json()
+            })
+
+            .then(r => {
+                results= r;
+                console.info(r);
+                if (r.length>0){
+                    console.log("Cogemos los users");
+                    updateResults();
+                }
+                else{
+                    console.info("Entra");
+                    mensajeError();
+                }
+
+            })
+            .catch(e => {
+                console.error("Error " + e)
+            })
+        return false;
+    })
+
+    function updateResults(){
+        console.log(results);
+        let html = '';
+
+        results.forEach(function(user, i){
+            console.log(user);
+            console.log(user.user_id);
+            html += '<div class="col">'
+                + '<div >'
+                + `<h5>${user.user_id}</h5>`
+                +`<p>${user.comment}</p>`
+                +`<p>${user.user}</p>`
+                +'</div>'
+                +'</div>';
+        })
+        document.getElementById("resultado").innerHTML = html;
+    }
+    function mensajeError(){
+        let html='';
+        html+='<h5>No hay resultado para los parámetros introducidos. Repita la búsqueda</h5>';
+        document.getElementById("container-cards").innerHTML = html;
+    }
+
+
+
+</script>
+
+</html>
