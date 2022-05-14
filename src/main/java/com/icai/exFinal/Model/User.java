@@ -21,4 +21,10 @@ public class User {
     private @Column("COMMENT") String comment;
 
 
+    public User(String userName, String password) {
+        this.user = userName;
+        this.comment = password;
+    }
+
+
 }

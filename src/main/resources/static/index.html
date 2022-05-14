@@ -32,6 +32,14 @@
         HOLA2
     </div>
 </div>
+<div>
+    <form class="d-flex" id="search-form3">
+        <button class="btn btn-outline-success" type="submit" data-bs-toggle="tooltip" data-bs-placement="right" title="Prueba post">POST<span class="badge bg-secondary">U</span></button>
+    </form>
+    <div id="resultado3">
+        HOLA3
+    </div>
+</div>
 
 
 </body>
@@ -180,6 +188,28 @@
             .catch(e => {
                 console.error("Error " + e)
             })
+        return false;
+    })
+
+    const searchForm4 = document.getElementById("search-form3");
+
+    searchForm4.addEventListener("submit", function(event){
+        event.preventDefault();
+
+       var data = { user: 'Carlota', comment: 'Prueba POST'};
+        //var data ="Carlota"
+
+    fetch(`http://localhost:8080/api/users/postbody`, {
+        method: 'POST', // or 'PUT'
+        body: JSON.stringify(data), // data can be `string` or {object}!
+        headers:{
+            'Content-Type': 'application/json'
+        }
+
+    }).then(res => res.json())
+        .catch(error => console.error('Error:', error))
+        .then(response => console.log('Success:', response))
+
         return false;
     })
 

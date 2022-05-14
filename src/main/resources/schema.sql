@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS USER;
 
 CREATE TABLE  "USER" (
-                          "USER_ID" NUMBER NOT NULL PRIMARY KEY,
+                          "USER_ID" integer identity NOT NULL PRIMARY KEY,
                           "USER" VARCHAR2(40) NOT NULL,
                           "COMMENT" VARCHAR2(35) NOT NULL
 );

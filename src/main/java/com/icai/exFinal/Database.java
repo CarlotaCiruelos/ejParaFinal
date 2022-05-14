@@ -18,7 +18,7 @@ public class Database {
     public void insertData() {
         LOGGER.info("> Inserting data...");
 
-        jdbcTemplate.execute("INSERT INTO USERS VALUES (101, 'user1', 'comment1')");
+       jdbcTemplate.execute("INSERT INTO USERS VALUES (101, 'u', 'comment1')");
         jdbcTemplate.execute("INSERT INTO USERS VALUES (102, 'user2', 'comment2')");
         jdbcTemplate.execute("INSERT INTO USERS VALUES (103, 'user3', 'comment3')");
         jdbcTemplate.execute("INSERT INTO USERS VALUES (104, 'user4', 'comment4')");

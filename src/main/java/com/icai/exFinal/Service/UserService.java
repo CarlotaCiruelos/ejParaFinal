@@ -13,4 +13,5 @@ public interface UserService {
     List<User> getUsers();
     boolean existsById(Long id);
     List<UserDocumentsDto> getAllUserDocuments();
+    User save(User user);
 }
