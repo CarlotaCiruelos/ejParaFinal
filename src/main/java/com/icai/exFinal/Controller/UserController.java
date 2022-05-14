@@ -1,5 +1,8 @@
 package com.icai.exFinal.Controller;
 
+import com.icai.exFinal.DTO.UserDocumentsDto;
+import com.icai.exFinal.DTO.UserWIthDocumentsDto;
+import com.icai.exFinal.Model.Document;
 import com.icai.exFinal.Model.User;
 import com.icai.exFinal.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +32,10 @@ public class UserController {
     @GetMapping("getAll")
     public ResponseEntity<List<User>> getAllUsers(){
         return ResponseEntity.ok().body(userService.getUsers());
+    }
+    @GetMapping("join")
+    public ResponseEntity<List<UserDocumentsDto>> getAllUserDocuments(){
+        return ResponseEntity.ok().body(userService.getAllUserDocuments());
     }
 
 }

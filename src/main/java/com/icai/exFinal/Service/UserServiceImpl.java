@@ -1,5 +1,7 @@
 package com.icai.exFinal.Service;
 
+import com.icai.exFinal.DTO.UserDocumentsDto;
+import com.icai.exFinal.DTO.UserWIthDocumentsDto;
 import com.icai.exFinal.Model.User;
 import com.icai.exFinal.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,5 +29,17 @@ public class UserServiceImpl implements UserService{
     @Override
     public boolean existsById(Long id){
         return  userRepository.existsById(id);
+    }
+
+    @Override
+    public List<UserDocumentsDto> getAllUserDocuments(){
+        return StreamSupport.stream(userRepository.getAllUserDocuments().spliterator(), false)
+                .map(obj -> new UserDocumentsDto(
+                        obj.getUser_id(),
+                        obj.getUser(),
+                        obj.getComment(),
+                        obj.getDoc(),
+                        obj.getDoc_id()
+                        )).toList();
     }
 }
