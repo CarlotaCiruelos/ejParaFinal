@@ -34,6 +34,9 @@
 </div>
 <div>
     <form class="d-flex" id="search-form3">
+        <input id="user" class="form-control " type="search" placeholder="USER..." aria-label="Search">
+
+        <input id="comment" class="form-control " type="search" placeholder="COMMENT..." aria-label="Search">
         <button class="btn btn-outline-success" type="submit" data-bs-toggle="tooltip" data-bs-placement="right" title="Prueba post">POST<span class="badge bg-secondary">U</span></button>
     </form>
     <div id="resultado3">
@@ -196,7 +199,7 @@
     searchForm4.addEventListener("submit", function(event){
         event.preventDefault();
 
-       var data = { user: 'Carlota', comment: 'Prueba POST'};
+       var data = { user: document.getElementById("user").value, comment: document.getElementById("comment").value};
         //var data ="Carlota"
 
     fetch(`http://localhost:8080/api/users/postbody`, {
